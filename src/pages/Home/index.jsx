@@ -1,10 +1,11 @@
-import React from 'react'
-import Page from '../../components/Page'
+import React from 'react';
+import Page from '../../components/Page';
+import SignupForm from '../../components/Forms/Form';
 
 export default function Home() {
-    return (
-        <Page title='Home'>
-            home
-        </Page>
-    )
+  return (
+    <Page title="Olá, seja bem-vindo! Preencha as informações abaixo para confirmar seu agendamento.">
+      <SignupForm />
+    </Page>
+  );
 }

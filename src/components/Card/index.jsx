@@ -5,7 +5,7 @@ export default function CardComponent({ title, children }) {
   return (
     <Card>
       <Card.Header>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title><center>{title}</center></Card.Title>
       </Card.Header>
       <Card.Body>
         {children}

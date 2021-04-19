@@ -1,11 +1,9 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { useLocation } from "react-router"
-
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 export default function Header({ routes = [] }) {
- const location = useLocation();
+  const location = useLocation();
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">

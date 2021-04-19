@@ -1,0 +1,16 @@
+div .error{
+    color : red;
+    font-size: 80%;
+}
+
+input {
+    width: 100%;
+}
+
+.react-datepicker-wrapper{
+    width: 100%;
+}
+
+/*.react-datepicker-wrapper input {
+    width: 100%;
+}*/
