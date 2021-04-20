@@ -5,50 +5,60 @@ import { Button } from 'react-bootstrap';
 import TextInput from './TextInput';
 import DatePickerField from './DatePicker';
 import TimeSelectField from './TimeSelect';
+import axios from '../../utils/api';
 
-// And now we can use these
-const SignupForm = () => (
-  <Formik
-    initialValues={{
-      name: '',
-      birthDate: null,
-      appointmentTime: null,
-    }}
-    validationSchema={Yup.object({
-      name: Yup.string().required('Campo obrigatório!').matches(/^[A-Za-z ]*$/, 'Por favor, insira um nome válido!'),
-      birthDate: Yup.date().required('Campo obrigatório!').nullable(),
-      appointmentTime: Yup.date().required('Campo obrigatório!').nullable(),
-    })}
-    onSubmit={(values) => console.log(values)}
-    validateOnChange={false}
-    validateOnBlur={false}
-  >
-    <Form className="mt-5">
-      <TextInput
-        label="Nome"
-        name="name"
-        type="text"
-        placeholder="Insira seu nome"
-      />
-      <br />
+const VaccineForm = () => {
+  const handleSubmit = async () => { // Testando a conexão com o backend e o db
+    try {
+      const response = await axios.get('/api/appointment');
+      console.log(response.data.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-      <DatePickerField
-        label="Data de nascimento"
-        name="birthDate"
-        placeholderText="Insira sua data de nascimento"
-      />
-      <br />
+  return (
+    <Formik
+      initialValues={{
+        name: '',
+        birthDate: null,
+        appointmentTime: null,
+      }}
+      validationSchema={Yup.object({
+        name: Yup.string().required('Campo obrigatório!').matches(/^[A-Za-z ]*$/, 'Por favor, insira um nome válido!'),
+        birthDate: Yup.date().required('Campo obrigatório!').nullable(),
+        appointmentTime: Yup.date().required('Campo obrigatório!').nullable(),
+      })}
+      onSubmit={handleSubmit}
+      validateOnChange={false}
+      validateOnBlur={false}
+    >
+      <Form className="mt-5">
+        <TextInput
+          label="Nome"
+          name="name"
+          type="text"
+          placeholder="Insira seu nome"
+        />
+        <br />
 
-      <TimeSelectField
-        label="Data do agendamento"
-        name="appointmentTime"
-        placeholderText="Selecione o dia e horário do seu agendamento"
-      />
+        <DatePickerField
+          label="Data de nascimento"
+          name="birthDate"
+          placeholderText="Insira sua data de nascimento"
+        />
+        <br />
 
-      <Button className="mt-5 text-center float-right" type="submit"> Confirmar Agendamento</Button>
-    </Form>
-  </Formik>
+        <TimeSelectField
+          label="Data do agendamento"
+          name="appointmentTime"
+          placeholderText="Selecione o dia e horário do seu agendamento"
+        />
 
-);
+        <Button className="mt-5 text-center float-right" type="submit"> Confirmar Agendamento</Button>
+      </Form>
+    </Formik>
+  );
+};
 
-export default SignupForm;
+export default VaccineForm;
