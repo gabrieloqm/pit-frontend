@@ -2,18 +2,28 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'react-bootstrap';
+import moment from 'moment';
+import { toast } from 'react-toastify';
 import TextInput from './TextInput';
 import DatePickerField from './DatePicker';
 import TimeSelectField from './TimeSelect';
 import axios from '../../utils/api';
 
 const VaccineForm = () => {
-  const handleSubmit = async () => { // Testando a conexão com o backend e o db
+  const handleSubmit = async (values) => {
+    const birthDate = moment(values.birthDate).format('DD/MM/YYYY');
+    const appointmentDate = moment(values.appointmentTime).format('DD/MM/YYYY');
+    const appointmentTime = moment(values.appointmentTime).format('LT');
+    const { name } = values;
+    const age = moment().diff(values.birthDate, 'years', true);
+
     try {
-      const response = await axios.get('/api/appointment');
-      console.log(response.data.data);
+      const response = await axios.post('/api/appointment', {
+        name, birthDate, age, appointmentDate, appointmentTime, isDone: false,
+      });
+      toast.success(response.data.message);
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.response.data.message);
     }
   };
 
