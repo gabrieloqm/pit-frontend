@@ -13,8 +13,8 @@ const VaccineForm = () => {
   const handleSubmit = async (values) => {
     const birthDate = moment(values.birthDate).format('DD/MM/YYYY');
     const appointmentDate = moment(values.appointmentTime).format('DD/MM/YYYY');
-    const appointmentTime = moment(values.appointmentTime).format('LT');
-    const { name } = values;
+    // const appointmentTime = moment(values.appointmentTime).format('HH:mm');
+    const { name, appointmentTime } = values;
     const age = moment().diff(values.birthDate, 'years', true);
 
     try {

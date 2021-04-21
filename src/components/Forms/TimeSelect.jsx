@@ -22,7 +22,7 @@ function TimeSelectField({ label, ...props }) {
               setFieldValue(field.name, val);
             }}
             showTimeSelect
-            dateFormat="dd/MM/yyyy  h:mm aa"
+            dateFormat="dd/MM/yyyy  HH:mm"
             timeIntervals={60}
             minDate={new Date()}
           />
