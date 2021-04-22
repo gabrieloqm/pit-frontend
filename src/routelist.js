@@ -4,12 +4,12 @@ import AppointmentList from './pages/Appointments';
 const routes = [
   {
     component: Home,
-    name: 'Home',
+    name: 'Agendamento',
     path: '/',
   },
   {
     component: AppointmentList,
-    name: 'Appointments',
+    name: 'Calendário de Vacinação',
     path: '/appointments',
   },
 ];

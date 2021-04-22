@@ -10,7 +10,7 @@ import TimeSelectField from './TimeSelect';
 import axios from '../../utils/api';
 
 const VaccineForm = () => {
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     const birthDate = moment(values.birthDate).format('DD/MM/YYYY');
     const appointmentDate = moment(values.appointmentTime).format('DD/MM/YYYY');
     // const appointmentTime = moment(values.appointmentTime).format('HH:mm');
@@ -22,6 +22,7 @@ const VaccineForm = () => {
         name, birthDate, age, appointmentDate, appointmentTime, isDone: false,
       });
       toast.success(response.data.message);
+      resetForm();
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -65,7 +66,10 @@ const VaccineForm = () => {
           placeholderText="Selecione o dia e horário do seu agendamento"
         />
 
-        <Button className="mt-5 text-center float-right" type="submit"> Confirmar Agendamento</Button>
+        <Button className="mt-5 text-center float-right" type="submit">
+          Confirmar Agendamento
+        </Button>
+
       </Form>
     </Formik>
   );
