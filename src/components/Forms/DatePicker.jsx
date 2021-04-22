@@ -25,7 +25,6 @@ function DatePickerField({ label, ...props }) {
             showYearDropdown
             showMonthDropdown
             dropdownMode="select"
-            maxDate={new Date()}
           />
           {meta.touched && meta.error ? (
             <div className="error">{meta.error}</div>

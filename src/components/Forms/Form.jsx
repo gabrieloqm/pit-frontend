@@ -57,6 +57,7 @@ const VaccineForm = () => {
           label="Data de nascimento"
           name="birthDate"
           placeholderText="Insira sua data de nascimento"
+          maxDate={new Date()}
         />
         <br />
 
@@ -64,6 +65,7 @@ const VaccineForm = () => {
           label="Data do agendamento"
           name="appointmentTime"
           placeholderText="Selecione o dia e horário do seu agendamento"
+          minDate={new Date()}
         />
 
         <Button className="mt-5 text-center float-right" type="submit">

@@ -21,11 +21,6 @@ input {
     font-size: 80%;
 }
 
-
-thead, tbody{
-    text-align: center;
-}
-
 thead {
     background-color: rgb(245, 255, 245);
 }

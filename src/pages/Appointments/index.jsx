@@ -1,10 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Table } from 'react-bootstrap';
+import {
+  Table, Button, Container,
+} from 'react-bootstrap';
 import moment from 'moment';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 import Page from '../../components/Page';
 import axios from '../../utils/api';
+import DatePickerField from '../../components/Forms/DatePicker';
 
 export default function AppointmentList() {
   const [appointments, setAppointments] = useState([]);
@@ -16,6 +21,16 @@ export default function AppointmentList() {
       setAppointments(response.data.data);
       toast.info(response.data.message);
       setIsLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const filterData = async (value) => {
+    try {
+      const response = await axios.get(`/api/appointment/${moment(value.filterDate).format('DDMMYYYY')}`);
+      setAppointments(response.data.data);
+      toast.info(response.data.message);
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -51,16 +66,44 @@ export default function AppointmentList() {
   };
 
   return (
-    <Page title="Lista de Agendamentos">
+
+    <Page title="Lista de Agendamentos das vacinações contra o COVID-19">
+      <Formik
+        initialValues={{ filterDate: null }}
+        validationSchema={Yup.object({ filterDate: Yup.date().required('Insira uma data!').nullable() })}
+        onSubmit={filterData}
+        validateOnChange={false}
+        validateOnBlur={false}
+
+      >
+        <Form className="mt-5">
+          <DatePickerField
+            label="Caso deseje, filtre por data:"
+            name="filterDate"
+            placeholderText="Filtre a lista de vacinações programadas por data"
+          />
+          <Container>
+            <Button onClick={() => fetchData()} className="text-center float-right mt-3 mb-5" type="reset" variant="secondary">
+              Remover Filtro
+            </Button>
+            <Button className="text-center float-right mt-3 mr-3 mb-5" type="submit">
+              Filtrar
+            </Button>
+          </Container>
+        </Form>
+      </Formik>
+
       {!isLoading && appointments.length === 0 && (
-        <h4 className="mt-5 text-center">
-          Olá! Ainda não existe nenhum agendamento para vacinação contra
+      <Table responsive="lg" className="mt-5">
+        <h4 className="text-center">
+          Olá! Ainda não existe agendamentos para vacinação contra
           COVID-19.
         </h4>
+      </Table>
       )}
       {!isLoading && appointments.length > 0 && (
         <Table bordered hover responsive="lg" className="mt-5">
-          <thead>
+          <thead className="text-center">
             <tr>
               <th width="15%">Data do atendimento</th>
               <th width="15%">Horário do atendimento</th>
@@ -69,7 +112,7 @@ export default function AppointmentList() {
               <th width="15%">Status do atendimento</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {appointments.map((appointment) => (
               <tr key={appointment._id}>
                 <td>{appointment.appointmentDate}</td>

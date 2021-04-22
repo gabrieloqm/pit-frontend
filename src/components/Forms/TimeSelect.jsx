@@ -24,7 +24,6 @@ function TimeSelectField({ label, ...props }) {
             showTimeSelect
             dateFormat="dd/MM/yyyy  HH:mm"
             timeIntervals={60}
-            minDate={new Date()}
           />
           {meta.touched && meta.error ? (
             <div className="error">{meta.error}</div>
