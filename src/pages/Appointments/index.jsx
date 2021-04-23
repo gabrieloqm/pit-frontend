@@ -7,6 +7,7 @@ import {
 import moment from 'moment';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { RiDeleteBin5Line as DeleteBin } from 'react-icons/ri';
 import Page from '../../components/Page';
 import axios from '../../utils/api';
 import DatePickerField from '../../components/Forms/DatePicker';
@@ -22,7 +23,7 @@ export default function AppointmentList() {
       toast.info(response.data.message);
       setIsLoading(false);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -65,9 +66,21 @@ export default function AppointmentList() {
     }
   };
 
+  const handleRemove = async ({ _id }) => {
+    const updatedAppointments = appointments.filter((appointment) => appointment._id !== _id);
+
+    try {
+      const response = await axios.delete(`api/appointment/${_id}`);
+      setAppointments(updatedAppointments);
+      toast.info(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
 
-    <Page title="Lista de Agendamentos das vacinações contra o COVID-19">
+    <Page title="Lista de Agendamentos das Vacinações contra o COVID-19">
       <Formik
         initialValues={{ filterDate: null }}
         validationSchema={Yup.object({ filterDate: Yup.date().required('Insira uma data!').nullable() })}
@@ -83,10 +96,10 @@ export default function AppointmentList() {
             placeholderText="Filtre a lista de vacinações programadas por data"
           />
           <Container>
-            <Button onClick={() => fetchData()} className="text-center float-right mt-3 mb-5" type="reset" variant="secondary">
+            <Button onClick={() => fetchData()} className="text-center float-right mt-3 mb-custom" type="reset" variant="secondary">
               Remover Filtro
             </Button>
-            <Button className="text-center float-right mt-3 mr-3 mb-5" type="submit">
+            <Button className="text-center float-right mt-3 mr-3 mb-custom" type="submit">
               Filtrar
             </Button>
           </Container>
@@ -94,7 +107,7 @@ export default function AppointmentList() {
       </Formik>
 
       {!isLoading && appointments.length === 0 && (
-      <Table responsive="lg" className="mt-5">
+      <Table responsive="lg">
         <h4 className="text-center">
           Olá! Ainda não existe agendamentos para vacinação contra
           COVID-19.
@@ -102,14 +115,15 @@ export default function AppointmentList() {
       </Table>
       )}
       {!isLoading && appointments.length > 0 && (
-        <Table bordered hover responsive="lg" className="mt-5">
+        <Table bordered hover responsive="lg">
           <thead className="text-center">
             <tr>
-              <th width="15%">Data do atendimento</th>
-              <th width="15%">Horário do atendimento</th>
-              <th width="40%">Nome do paciente</th>
-              <th width="15%">Idade do paciente</th>
-              <th width="15%">Status do atendimento</th>
+              <th width="10%">Data do atendimento</th>
+              <th width="10%">Horário do atendimento</th>
+              <th width="35%">Nome do paciente</th>
+              <th width="10%">Idade do paciente</th>
+              <th width="20%">Status do atendimento</th>
+              <th width="20%">Remover agendamento</th>
             </tr>
           </thead>
           <tbody className="text-center">
@@ -130,6 +144,16 @@ export default function AppointmentList() {
                   ) : (
                     <span id="pending-message">Atendimento Pendente!</span>
                   )}
+                </td>
+                <td>
+                  <Button
+                    onClick={() => handleRemove(appointment)}
+                    variant="outline-danger"
+                  >
+                    <DeleteBin />
+
+                  </Button>
+
                 </td>
               </tr>
             ))}

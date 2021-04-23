@@ -17,14 +17,31 @@ input {
 }
 
 #pending-message{
-    color: red;
+    color:orange;
     font-size: 80%;
 }
 
 thead {
-    background-color: rgb(245, 255, 245);
+    background-color: rgb(246, 250, 253);
 }
-/*.react-datepicker-wrapper input {
-    width: 100%;
+
+
+
+.table > thead > tr > th {
+    vertical-align: middle
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle
+}
+
+/*th,td{
+    vertical-align: middle !important;
 }*/
+
+.mb-custom {
+    margin-bottom: 5rem;
+}
+
+
 
