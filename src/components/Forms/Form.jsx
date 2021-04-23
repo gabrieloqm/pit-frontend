@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'react-bootstrap';
@@ -10,20 +10,25 @@ import TimeSelectField from './TimeSelect';
 import axios from '../../utils/api';
 
 const VaccineForm = () => {
+  const [buttonVisible, setButtonVisible] = useState(true);
+
   const handleSubmit = async (values, { resetForm }) => {
     const birthDate = moment(values.birthDate).format('DD/MM/YYYY');
     const appointmentDate = moment(values.appointmentTime).format('DD/MM/YYYY');
     // const appointmentTime = moment(values.appointmentTime).format('HH:mm');
     const { name, appointmentTime } = values;
     const age = moment().diff(values.birthDate, 'years', true);
+    setButtonVisible(false);
 
     try {
       const response = await axios.post('/api/appointment', {
         name, birthDate, age, appointmentDate, appointmentTime, isDone: false,
       });
-      toast.success(response.data.message);
       resetForm();
+      setButtonVisible(true);
+      toast.success(response.data.message);
     } catch (error) {
+      setButtonVisible(true);
       toast.error(error.response.data.message);
     }
   };
@@ -68,7 +73,7 @@ const VaccineForm = () => {
           minDate={new Date()}
         />
 
-        <Button className="mt-5 text-center float-right" type="submit">
+        <Button disabled={!buttonVisible} className="mt-5 text-center float-right" type="submit">
           Confirmar Agendamento
         </Button>
 
