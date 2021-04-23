@@ -22,7 +22,12 @@ const VaccineForm = () => {
 
     try {
       const response = await axios.post('/api/appointment', {
-        name, birthDate, age, appointmentDate, appointmentTime, isDone: false,
+        name,
+        birthDate,
+        age,
+        appointmentDate,
+        appointmentTime,
+        isDone: false,
       });
       resetForm();
       setButtonVisible(true);
@@ -41,7 +46,9 @@ const VaccineForm = () => {
         appointmentTime: null,
       }}
       validationSchema={Yup.object({
-        name: Yup.string().required('Campo obrigatório!').matches(/^[A-Za-z ]*$/, 'Por favor, insira um nome válido!'),
+        name: Yup.string()
+          .required('Campo obrigatório!')
+          .matches(/^[A-Za-z ]*$/, 'Por favor, insira um nome válido!'),
         birthDate: Yup.date().required('Campo obrigatório!').nullable(),
         appointmentTime: Yup.date().required('Campo obrigatório!').nullable(),
       })}
@@ -73,10 +80,13 @@ const VaccineForm = () => {
           minDate={new Date()}
         />
 
-        <Button disabled={!buttonVisible} className="mt-5 text-center float-right" type="submit">
+        <Button
+          disabled={!buttonVisible}
+          className="mt-5 text-center float-right"
+          type="submit"
+        >
           Confirmar Agendamento
         </Button>
-
       </Form>
     </Formik>
   );

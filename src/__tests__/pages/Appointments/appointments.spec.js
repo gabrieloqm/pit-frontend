@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import AppointmentList from '../../../pages/Appointments';
 
 describe('AppointmentList Page', () => {
@@ -17,7 +18,7 @@ describe('AppointmentList Page', () => {
     render(<AppointmentList />);
 
     const removeFilterButton = screen.getByRole('button', {
-      name: 'Remover filtro',
+      name: 'Remover Filtro',
     });
 
     expect(removeFilterButton).toBeInTheDocument();

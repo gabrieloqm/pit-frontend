@@ -12,7 +12,11 @@ function DatePickerField({ label, ...props }) {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <Col md={3}><label htmlFor={name}><b>{label}</b></label></Col>
+        <Col md={3}>
+          <label htmlFor={name}>
+            <b>{label}</b>
+          </label>
+        </Col>
         <Col>
           <DatePicker
             {...field}
@@ -30,9 +34,7 @@ function DatePickerField({ label, ...props }) {
             <div className="error">{meta.error}</div>
           ) : null}
         </Col>
-
       </Row>
-
     </Container>
   );
 }

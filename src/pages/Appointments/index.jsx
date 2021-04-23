@@ -1,9 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import {
-  Table, Button, Container,
-} from 'react-bootstrap';
+import { Table, Button, Container } from 'react-bootstrap';
 import moment from 'moment';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -29,7 +27,9 @@ export default function AppointmentList() {
 
   const filterData = async (value) => {
     try {
-      const response = await axios.get(`/api/appointment/${moment(value.filterDate).format('DDMMYYYY')}`);
+      const response = await axios.get(
+        `/api/appointment/${moment(value.filterDate).format('DDMMYYYY')}`,
+      );
       setAppointments(response.data.data);
       toast.info(response.data.message);
     } catch (error) {
@@ -67,7 +67,9 @@ export default function AppointmentList() {
   };
 
   const handleRemove = async ({ _id }) => {
-    const updatedAppointments = appointments.filter((appointment) => appointment._id !== _id);
+    const updatedAppointments = appointments.filter(
+      (appointment) => appointment._id !== _id,
+    );
 
     try {
       const response = await axios.delete(`api/appointment/${_id}`);
@@ -79,15 +81,15 @@ export default function AppointmentList() {
   };
 
   return (
-
     <Page title="Lista de Agendamentos das Vacinações contra o COVID-19">
       <Formik
         initialValues={{ filterDate: null }}
-        validationSchema={Yup.object({ filterDate: Yup.date().required('Insira uma data!').nullable() })}
+        validationSchema={Yup.object({
+          filterDate: Yup.date().required('Insira uma data!').nullable(),
+        })}
         onSubmit={filterData}
         validateOnChange={false}
         validateOnBlur={false}
-
       >
         <Form className="mt-5">
           <DatePickerField
@@ -96,10 +98,18 @@ export default function AppointmentList() {
             placeholderText="Filtre a lista de vacinações programadas por data"
           />
           <Container>
-            <Button onClick={() => fetchData()} className="text-center float-right mt-3 mb-custom" type="reset" variant="secondary">
+            <Button
+              onClick={() => fetchData()}
+              className="text-center float-right mt-3 mb-custom"
+              type="reset"
+              variant="secondary"
+            >
               Remover Filtro
             </Button>
-            <Button className="text-center float-right mt-3 mr-3 mb-custom" type="submit">
+            <Button
+              className="text-center float-right mt-3 mr-3 mb-custom"
+              type="submit"
+            >
               Filtrar
             </Button>
           </Container>
@@ -107,12 +117,11 @@ export default function AppointmentList() {
       </Formik>
 
       {!isLoading && appointments.length === 0 && (
-      <Table responsive="lg">
-        <h4 className="text-center">
-          Olá! Ainda não existe agendamentos para vacinação contra
-          COVID-19.
-        </h4>
-      </Table>
+        <Table responsive="lg">
+          <h4 className="text-center">
+            Olá! Ainda não existe agendamentos para vacinação contra COVID-19.
+          </h4>
+        </Table>
       )}
       {!isLoading && appointments.length > 0 && (
         <Table bordered hover responsive="lg">
@@ -151,9 +160,7 @@ export default function AppointmentList() {
                     variant="outline-danger"
                   >
                     <DeleteBin />
-
                   </Button>
-
                 </td>
               </tr>
             ))}

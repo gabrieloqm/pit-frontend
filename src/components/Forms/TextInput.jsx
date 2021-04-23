@@ -9,7 +9,11 @@ const TextInput = ({ label, ...props }) => {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <Col md={3}><label htmlFor={name}><b>{label}</b></label></Col>
+        <Col md={3}>
+          <label htmlFor={name}>
+            <b>{label}</b>
+          </label>
+        </Col>
         <Col>
           <input className="text-input" {...field} {...props} />
           {meta.touched && meta.error ? (
@@ -17,7 +21,6 @@ const TextInput = ({ label, ...props }) => {
           ) : null}
         </Col>
       </Row>
-
     </Container>
   );
 };

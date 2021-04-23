@@ -11,7 +11,12 @@ export default function Header({ routes = [] }) {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           {routes.map(({ name, path }) => (
-            <Nav.Link as={Link} key={path} to={path} active={path === location.pathname}>
+            <Nav.Link
+              as={Link}
+              key={path}
+              to={path}
+              active={path === location.pathname}
+            >
               {name}
             </Nav.Link>
           ))}
