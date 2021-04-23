@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+# pit-frontend
+Desafio referente à implementação do frontend de uma aplicação de agendamento da vacinação contra a COVID-19. Em relação aos agendamentos e sua visualização, devemos seguir algumas regras:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- O agendamento deve ser feito em uma página por um formulário.
+- Deve ser criada uma página para consultar os agendamentos marcados.
+- O resultado dos agendamentos deve ser agrupado por dia e hora do agendamento.
+- O paciente deve informar seu nome, data de nascimento e dia e horário para o agendamento.
+- Os campos do formulário devem ter validação, todos são obrigatórios.
+- O enfermeiro deve ser capaz de informar o status do atendimento na listagem.
+- Quando o usuário recarregar a página, os dados não podem ser perdidos.
 
-## Available Scripts
+## :blue_book: Instruções de uso
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Baixe o repositório através do comando `git clone https://github.com/gabrieloqm/pit-frontend.git`
+- Instale os pacotes necessários para esta aplicação através do `yarn` ou `npm install`
+- Verifique a variável de ambiente em `.env.example` e crie um arquivo `.env` inserindo o valor para a variável. A API está rodando no endereço `http://localhost:3333`, que é referente a mesma porta definida no projeto `pit-backend`.
+- Após iniciar o backend, inicie a aplicação utilizando `yarn start`
+- Através do `yarn test`, verifique os resultados dos testes construídos.
